@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="icon" type="image/x-icon" href="../imgs/LOGO.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="style.css">
+  <title>Home</title>
+</head>
+
+<body>
+   <%- include('partials/navbar2', {userIn}); %>
+        <div class="temp"></div>
+
+        <section class="sec1">
+          <form action="/search" method="get">
+            <div class="header"><i class="fa fa-book"></i>
+              <h2 class="booksh2">BOOKS</h2>
+            </div>
+
+            <div class="search">
+              <div class="w3-xlarge"><i class="fa fa-search"></i></div>
+              <input type="search" name="q" id="book" placeholder="Search...">
+            </div>
+          </form>
+
+          <div id="containt">
+            <div class="left">
+              <h1> Western Canada</h1>
+              <h4>by Jack Altman</h3>
+                <p>"Every book in a bookstore is a fresh beginning. Every book is the next iteration of a very old story. Every bookstore, therefore, is like a safe-deposit box for civilization"</p>
+            </div>
+
+            <div class="books">
+              <% MostRated.forEach(book=> { %>
+                <a href="/book/<%= book.book_id %>"> <img src="<%= book.photo %>" alt="<%= book.title %>">
+                </a>
+                <% }) %>
+            </div>
+          </div>
+        </section>
+
+        <section class="sec2">
+          <nav>
+            <div class="contaier">
+              <ul class="new">
+                <li onclick="movetoplace('NewArrivals')">New Arrivals</li>
+                <li onclick="movetoplace('Popular')"> Most Popular</li>
+                <li onclick="movetoplace('Features')">Features</li>
+                <li onclick="movetoplace('Events')">Latest Events</li>
+
+
+              </ul>
+              <ul class="old">
+                <a href="/blogs">
+                  <li>Blogs</li>
+                </a>
+                <a href="/events">
+                  <li>Events</li>
+                </a>
+                <a href="/borrowbooks">
+                  <li>Borrow Books</li>
+                </a>
+
+
+              </ul>
+              <ul class="education">
+                <a href="/searchtag?q=''&tag=Fantasy">
+                  <li>Fantasy </li>
+                </a>
+                <a href="/searchtag?q=''&tag=Adventure">
+                  <li>Adventure</li>
+                </a>
+                <a href="/searchtag?q=''&tag=Horror">
+                  <li>Horror</li>
+                </a>
+                <a href="/searchtag?q=''&tag=Mystery">
+                  <li>Mystery</li>
+                </a>
+              </ul>
+            </div>
+          </nav>
+          <div id="NewArrivals">
+            <div class="NewArrivals_Header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book"
+                viewBox="0 0 16 16">
+                <path
+                  d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+              </svg>
+              <h3>New arrivals</h3>
+            </div>
+            <div class="books arrival">
+              <% latest.forEach(book=> { %>
+                <img src="<%= book.photo %>" alt="<%= book.title%>" id="<%= book.book_id %>"
+                  onclick="displayimg2(this.id)">
+                <form id="show_BOOK">
+                  <div id="show_cont">
+                    <img src="<%= book.photo %>" alt="<%= book.title%>" id="show_img">
+
+                    <div id="show_info_cont">
+                      <div class="bookdata">
+                        <h1>
+                          <%= book.title %>
+                        </h1>
+                        <h4 onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;">
+                          By :
+                          <%= book.username %>
+                        </h4>
+                        <h6>
+                          <%= book.date_published %>
+                        </h6>
+                        <div class="rating">
+                          <% for( let i=0; i < book.rating; i++ ) { %>
+                            <img src="./imgs/star.png" alt="" />
+                            <% } %>
+                              <% for( let i=0; i < 5 - book.rating; i++ ) { %>
+                                <img src="./imgs/star (1).png" alt="" />
+                                <% } %>
+                        </div>
+                        <p>
+                          <%=book.description.length>350?book.description.substring(0,350)+"...": book.description%>
+                        </p>
+                      </div>
+                      <div class="show_books_btns">
+
+                        <button class="add_to_cart" onclick="sendtocart('<%=book.book_id%>')">ADD TO
+                          CART</button>
+                        <a href="/book/<%= book.book_id %>" class="view_book">VIEW BOOK</a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+                <% }) %>
+            </div>
+          </div>
+        </section>
+        <section class="sec3">
+          <div id="deal">
+            <div class="NewArrivals_Header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book"
+                viewBox="0 0 16 16">
+                <path
+                  d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+              </svg>
+              <h3 id="Popular">Most Popular</h3>
+            </div>
+            <div class="books arrival deal">
+              <% books.forEach(book=> { %>
+                <img src="<%= book.photo %>" alt="<%= book.title %>" id="<%= book.book_id %>"
+                  onclick="displayimg2(this.id)">
+                <div id="show_BOOK">
+                  <div id="show_cont">
+                    <img src="<%= book.photo %>" alt="<%= book.title %>" id="show_img">
+                    <div id="show_info_cont">
+                      <div class="bookdata">
+                        <h1>
+                          <%= book.title %>
+                        </h1>
+                        <h4 onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;">
+                          By :
+                          <%= book.username %>
+                        </h4>
+                        <h6>
+                          <%= book.date_published %>
+                        </h6>
+                        <div class="rating">
+                          <% for( let i=0; i < book.rating; i++ ) { %>
+                            <img src="./imgs/star.png" alt="" />
+                            <% } %>
+                              <% for( let i=0; i < 5 - book.rating; i++ ) { %>
+                                <img src="./imgs/star (1).png" alt="" />
+                                <% } %>
+                        </div>
+                        <p>
+                          <%=book.description.length>350?book.description.substring(0,350)+"...": book.description%>
+                        </p>
+                      </div>
+                      <div class="show_books_btns">
+                        <button class="add_to_cart" onclick="sendtocart('<%=book.book_id%>')">ADD TO
+                          CART</button>
+                        <a href="/book/<%= book.book_id %>" class="view_book">VIEW BOOK</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+          </div>
+          <div id="Features">
+            <div class="NewArrivals_Header">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book"
+                viewBox="0 0 16 16">
+                <path
+                  d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811V2.828zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492V2.687zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783z" />
+              </svg>
+              <h3>Features</h3>
+            </div>
+            <div class="books arrival deal">
+              <% featured.forEach(book=> { %>
+                <img src="<%= book.photo %>" alt="<%= book.title %>" id="<%= book.book_id %>"
+                  onclick="displayimg2(this.id)">
+                <div id="show_BOOK">
+                  <div id="show_cont">
+                    <img src="<%= book.photo %>" alt="<%= book.title %>" id="show_img">
+
+                    <div id="show_info_cont">
+                      <div class="bookdata">
+                        <h1>
+                          <%= book.title %>
+                        </h1>
+                        <h4 onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;">
+
+                          By :
+                          <%= book.username %>
+                        </h4>
+                        <h6>
+                          <%= book.date_published %>
+                        </h6>
+                        <div class="rating">
+                          <% for( let i=0; i < book.rating; i++ ) { %>
+                            <img src="./imgs/star.png" alt="" />
+                            <% } %>
+                              <% for( let i=0; i < 5 - book.rating; i++ ) { %>
+                                <img src="./imgs/star (1).png" alt="" />
+                                <% } %>
+                        </div>
+                        <p>
+                          <%=book.description.length>350?book.description.substring(0,350)+"...": book.description%>
+                        </p>
+                      </div>
+                      <div class="show_books_btns">
+                        <button class="add_to_cart" onclick="sendtocart(<%=JSON.stringify(book.book_id)%>)">ADD TO
+                          CART</button>
+                        <a href="/book/<%= book.book_id%>" class="view_book">VIEW BOOK</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <% }) %>
+            </div>
+          </div>
+        </section>
+        <section class="sec4" id="sec4">
+          <h2> Our latest Events</h2>
+          <div id="Events">
+            <% events.forEach(event=> { %>
+              <div class="Event reveal">
+                <img src="<%= event.event_photo %>" alt="">
+                <div id="type">
+                  <h5>
+                    <%= event.due_to %>
+                  </h5>
+                  <h3>
+                    <%= event.title %>
+                  </h3>
+                  <p>
+                    <%=event.description.length>350?event.description.substring(0,350)+"...": event.description%>
+                  </p>
+                  <a href="/events/#<%= event.id %>"> <button> Contiune Reading ...</button></a>
+                </div>
+              </div>
+              <% }) %>
+          </div>
+          <a id="ViewEvents" href="/events">View All Events</a>
+        </section>
+
+        <%- include ('partials/footer') %>
+        <script src="app.js"></script>
+        
+      
+</body>
+
+</html>

@@ -1,0 +1,129 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="../signin2.css" >
+
+    <title>Create Account</title>
+</head>
+
+<body>
+
+    <!--                    input Container              -->
+    <div id="mainFrame">
+        <form action="/newUser" method="post">
+            <div id="balanceGender">
+                <div id="balance_gender">
+                    <div id="firstLast">
+                        <div id="firstName">
+                            <h2 class="centerText">First Name</h2>
+                            <input type="text" placeholder="First Name" class="textInput firstInput" name="FirstName">
+                        </div>
+                        <div id="lastName">
+                            <h2 class="centerText">Last Name</h2>
+                            <input type="text" placeholder="Last Name" class="textInput lastInput" name="LastName">
+                        </div>
+                    </div>
+
+                    <div id="balance">
+                        <h2 class="centerText">Initial Balance</h2>
+                        <input type="text" placeholder="500 EGP" class="textInput balanceInput" name="balance"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+
+                    <div id="gender">
+                        <h2 class="centerText">Gender</h2>
+                        <div id="genderBtnsCont">
+
+                            <label class="userGender" for="Male">
+                                <input type="radio" name="Gender" id="Male" value="Male" checked>
+                                <label for="Male">Male</label>
+                            </label>
+
+
+                            <label class="userGender" for="Female">
+                                <input type="radio" name="Gender" id="Female" value="Female">
+                                <label for="Female">Female</label>
+                            </label>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="file-image">
+                    <img src="../err" alt="" id="uploadedImg">
+                    <img src="../imgs/upload.png" alt="" id="tempimg">
+                    <p>Upload Your <br> Image Here </p>
+                </div>
+
+                <input type="file" id="inputPostimg" name="img" accept="image/*" onchange="loadFile(event)"
+                    class="postimg">
+                    <input type="text" name="photo" id="imageUrl" style="display: none;">
+                            </div>
+
+
+
+
+            <!--                    tags             -->
+            <h2 class="centerText">Favourite Tags</h2>
+            <div id="tagSection">
+                <input type="hidden" name="tags" value="itsme">
+                <% tags.forEach(tag=> { %>
+                    <input type="checkbox" class="btn-check" id="btn-check-outlined<%=tag.tag_name%>" name="tags"
+                        value="<%= tag.tag_name%>">
+                    <label class="btn btn-outline-primary" for="btn-check-outlined<%=tag.tag_name%>">
+                        <%=tag.tag_name%>
+                    </label>
+                    <% }) %>
+            </div>
+
+            <input type="submit" id="subBut" value="Create account">
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+        var box = document.getElementsByClassName("file-image")[0];
+        var fileInp = document.getElementById("inputPostimg");
+        box.addEventListener('click', () => {
+            fileInp.click();
+        })
+        var loadFile = async function (event) {
+
+            var image = document.getElementById('uploadedImg');
+            var tempimg = document.getElementById('tempimg');
+            let fileimage = document.getElementsByClassName('file-image')[0];
+            fileimage.getElementsByTagName('p')[0].style.opacity=0
+            fileimage.getElementsByTagName('img')[1].style.opacity=0
+            
+            image.style.opacity = 1
+            fileimage.style.border = 'none'
+            var file = document.getElementById('inputPostimg');
+var form = new FormData();
+form.append("image", file.files[0])
+var settings = {
+  "url": "https://api.imgbb.com/1/upload?key=b79ad1c2e8b9883bd4de5f26d5b427bd",
+  "method": "POST",
+  "timeout": 0,
+  "processData": false,
+  "mimeType": "multipart/form-data",
+  "contentType": false,
+  "data": form
+};
+image.src='../imgs/loading.gif';
+let x=await  axios(settings)
+document.getElementById('imageUrl').value= x.data.data.display_url
+            image.src = x.data.data.display_url
+        };
+
+    </script>
+</body>
+
+</html>

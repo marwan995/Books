@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="LOGO.png">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="../../style_search_page.css" />
+  <link rel="stylesheet" href="../../footer.css">
+  <title>Search</title>
+</head>
+
+<body>
+  <%- include('partials/navbar', {q: q, active: "Books" }); %>
+    <div class="search">
+      <div class="filters">
+        <h3>Shop by Category</h3>
+        <ul class="options">
+          <% if (active=='All Genre') { %>
+          <li class="active"onclick="GetbooksBytag(`All Genre`)" >All Genre</li>
+          <% } else { %>
+            <li onclick="GetbooksBytag(`All Genre`)" >All Genre</li>
+            <% } %>  
+          <% tags.forEach(tag => { %>
+          <% if (active==tag.tag_name) { %>
+            <li class="active" onclick="GetbooksBytag(`<%=tag.tag_name%>`)"><%= tag.tag_name %></li>
+          <% } else { %>
+            <li  onclick="GetbooksBytag(`<%=tag.tag_name%>`)"><%= tag.tag_name %></li>
+            <% } %>  
+            <% }) %>
+            <form action="/searchtag" id="test" method="post" style="display: none;">
+              <input type="text" name="tag" id="">
+        </form>
+        </ul>
+      
+      </div>
+
+      <% if (result.length==0) { %>
+        <div id="temp">
+           <h1>
+           Hmmmm .... we dont have what you are looking for Yet 
+       </h1>
+      
+        </div>
+       <% }else{ %>
+
+      <div class="books">
+        <% result.forEach(book=> { %>
+          <div class="book">
+            <img src="<%= book.photo %>" class="cover" alt="" onclick="location.href=`/book/<%= book.book_id %>`"/>
+            <div class="book-content">
+              <h3>
+                <%= book.title %>
+              </h3>
+              <h4 onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;"> 
+                
+                <%= book.username %>
+              </h4>
+              <h3 class="price">$ <%= book.price %>
+              </h3>
+              <div class="book-rating">
+                <div class="rating">
+                  <% for( let i=0; i < book.rating; i++ ) { %>
+                    <img src="./imgs/star.png" alt="" />
+                    <% } %>
+                      <% for( let i=0; i < 5 - book.rating; i++ ) { %>
+                        <img src="./imgs/star (1).png" alt="" />
+                        <% } %>
+                </div>
+                <h4>
+                  <%= book.review_count%> reviews
+                </h4>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+      </div>
+      <% }%>
+    </div>
+    </div>
+    <%- include ('partials/footer') %> 
+    <script>
+      function GetbooksBytag(t){
+     let form=   document.getElementById('test');
+    
+        let ans=form.getElementsByTagName('input')[0];
+        ans.value=t;
+    form.submit();
+      }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="icon" type="image/x-icon" href="../imgs/LOGO.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../Eventstyle.css">
+
+    <title>Events</title>
+</head>
+
+<body>
+    <div id="navleftbar">
+        <div class="line"></div>
+        <a href="/"> <img src="../imgs/LOGO.png" alt="" id="logo"></a>
+        <div id="icons">
+            <a href="/admin"> <img src="../imgs/normal.png" alt=""></a>
+            <a href="/admin/users"><svg class="iconnav" xmlns="http://www.w3.org/2000/svg" width="28" height="28"
+                    fill="currentColor" class="bi bi-card-list" viewBox="0 0 16 16">
+                    <path
+                        d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+                    <path
+                        d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" />
+                    </a>
+            <a href="/admin/event"> <img src="../imgs/eventactive.png" alt=""></a>
+            </svg> <svg class="iconnav" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="feather feather-settings">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                    d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                </path>
+            </svg>
+        </div>
+
+    </div>
+    <div id="content">
+        <div id="navbar">
+            <h1>Dashboard</h1>
+            <div id="notleft">
+                <img src="../imgs/notOn.png" alt="" id="not">
+
+                <p id="username" onclick="location.href='/profile/<%= userIn.username %>'" style="cursor: pointer;"> <%= userIn.username %> </p>
+                <img src="<%= userIn.profile_pic %>" alt="" id="pfp">
+            </div>
+        </div>
+        <div id="users">
+            <form action="/admin/addevent" method="post" class="user">
+
+                <section class="sec1">
+                    <div>
+                        <div class="file-image1">
+                            <img src="../imgs/t.png" alt="" id="uploadedImg1">
+                            <img src="../imgs/Addcover.png" alt="" id="tempimg1">
+                            <input type="file" id="inputPostimg1" name="src" accept="image/*"
+                                onchange="loadcover()" class="postimg" >
+                            <p>Event Cover </p>
+                            <input type="hidden" name="cover" value="" id="newcover">
+                        </div>
+                    </div>
+                </section>
+                <div id="balanceGender">
+                    <div id="balance_gender">
+                        <div id="title">
+                            <h2 class="centerText">Title :</h2>
+                            <input type="text" placeholder="Title" class="textInput firstInput" name="title">
+
+
+                        </div>
+                        <div id="sec2">
+                            <div id="tickets">
+                                <h2 class="centerText">Tickets :</h2>
+                                <input type="number" placeholder="500 Ticket" class="textInput firstInput"
+                                    name="tickets" min="10" max="10000" maxlength="8">
+
+
+                            </div>
+                            <div id="tickets" class="number">
+                                <h2 class="centerText">Price :</h2>
+                                <input type="number" placeholder="300 EGP" class="textInput firstInput" name="price"
+                                    min="10" max="1000" maxlength="8">
+
+
+                            </div>
+                            <div id="tickets">
+                                <h2 class="centerText">Duo-To :</h2>
+                                <div id="due_to">
+                                    <input type="number" class="textInput birth" min="1" max="31" placeholder="Day"
+                                        name="dd">
+                                    <input type="number" class="textInput birth" min="1" max="12" placeholder="Month"
+                                        name="mm">
+                                    <input type="number" class="textInput birth" min="1900" max="2023"
+                                        placeholder="Year" name="yyyy" maxlength="4">
+                                </div>
+                            </div>
+                            <div id="title">
+                                <h2 class="centerText">Location :</h2>
+                                <input type="text" placeholder="Location" class="textInput firstInput" name="Location">
+
+
+                            </div>
+                        </div>
+                       
+                        <textarea name="description" id="bookdes" cols="25" rows="5" placeholder=" Event Description ..."
+                            required></textarea>
+                        <button id="addevent" type="submit" > Add Event</button>
+                    </div>
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script >
+        var fileInp1 = document.getElementById("inputPostimg1");
+let box1= document.getElementsByClassName("file-image1")[0]
+
+box1.addEventListener('click', () => {
+  fileInp1.click();
+})
+var loadcover = async function () {
+
+   
+var image1 = document.getElementById('uploadedImg1');
+var tempimg1 = document.getElementById('tempimg1');
+let fileimage1 = document.getElementsByClassName('file-image1')[0];
+
+fileimage1.style.opacity = 1
+
+fileimage1.getElementsByTagName('p')[0].style.opacity = 0
+fileimage1.getElementsByTagName('img')[1].style.opacity = 0
+
+image1.style.opacity = 1
+
+
+fileimage1.style.border = 'none'
+var file1 = document.getElementById('inputPostimg1');
+var form1 = new FormData();
+form1.append("image", file1.files[0])
+console.log(file1.files[0])
+var settings1 = {
+    "url": "https://api.imgbb.com/1/upload?key=b79ad1c2e8b9883bd4de5f26d5b427bd",
+    "method": "POST",
+    "timeout": 0,
+    "processData": false,
+    "mimeType": "multipart/form-data",
+    "contentType": false,
+    "data": form1
+};
+image1.src = '../imgs/loading2.gif';
+
+axios(settings1).then(res=>{
+    document.getElementById('newcover').value = res.data.data.url
+
+document.getElementsByClassName('sec1')[0].style.backgroundImage= `url(${res.data.data.url})`
+image1.style.display='none'
+fileimage1.style.opacity = 0
+})
+
+
+
+
+};
+
+    </script>
+</body>
+
+</html>

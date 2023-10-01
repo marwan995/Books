@@ -1,0 +1,92 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="icon" type="image/x-icon" href="../imgs/LOGO.png">
+    <link rel="stylesheet" href="../signin.css" type="text/css">
+    <link rel="stylesheet" href="../footer.css">
+    <title>Login</title>
+</head>
+
+<body>
+    <%- include('partials/navbar', {q: "" , active: "" }); %>
+    <form  method="post" name="signing">
+        <div id="mainFrame">
+            <img class="signinBanner" src="../imgs/holiday-illustration3.jpg" alt="">
+            <img class="signinBanner" src="../imgs/summer-island3.jpg" alt="">
+
+            <div id="infoCont">
+                <div id="tabCont">
+                    <button type="button" id="signinTab" class="tabBut activeTab" onclick="toSigninTab()">Sign
+                        Up</button>
+                    <button type="button" id="loginTab" class="tabBut" onclick="toLoginTab()">Login</button>
+                </div>
+
+                <div id="inputCont">
+                    <div id="tabNameCont">
+                        <h2 id="signinH2" class="Sh2">Create an Account</h2>
+                        <h2 id="hidden" class="Sh2 hiddenH2">Welcome Back</h2>
+                    </div>
+                    <div id="loginSec">
+                        <h6>You're a</h6>
+                        <div id="userTypeCont">
+                            <label class="userTypeBut">
+                                <input type="radio" name="userType" id="typeReader" value="Reader" checked>
+                                <label for="typeReader">Reader</label>
+                            </label>
+
+                            <label class="userTypeBut">
+                                <input type="radio" name="userType" id="typeAuthor" value="Author">
+                                <label for="typeAuthor">Author</label>
+                            </label>
+                        </div>
+                        <h6>Enter Your Username:</h6>
+                        <input type="text" placeholder="Username" class="textInput" name="username" required>
+                        <h6>Enter Your Password:</h6>
+                        <input type="password" placeholder="Password" class="textInput" name="pass" required>
+                    </div>
+                    <div id="signinSection">
+                        <h6>Phone Number:</h6>
+                        <input type="text" placeholder="01123456789" class="textInput full" name="phon" >
+
+                        <h6>Birth Date:</h6>
+                        <div id="birthCont">
+                            <input type="number" class="textInput birth" min="1900" max="2022" placeholder="Year"
+                                name="yyyy">
+                            <input type="number" class="textInput birth" min="1" max="12" placeholder="Month" name="mm">
+                            <input type="number" class="textInput birth" min="1" max="31" placeholder="Day" name="dd">
+                        </div>
+
+                        <h6>Address:</h6>
+                        <input type="text" placeholder="City" name="City" class="textInput full">
+                    </div>
+                </div>
+                <button type="submit" id="subBut" >Create account</button>
+                <% if(messages && messages.length) {%>
+           
+                    <h2 id="Error"><%= messages %></h2>
+                <% } %>
+
+            </div>
+        </div>
+    </form>
+    <%- include ('partials/footer') %>
+    
+    <script src="../script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script>
+           <% if(messages && messages.length) {%>
+            toLoginTab()
+       <% } %>
+    </script>
+</body>
+
+</html>

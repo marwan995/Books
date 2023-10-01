@@ -1,0 +1,227 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+
+.navbar {
+  background: #fff;
+}
+.navbar .upper {
+  padding: 20px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  background: #fff;
+}
+.navbar .upper .logo {
+  text-decoration: none;
+  color: #474747;
+  display: flex;
+  align-items: center;
+}
+.navbar .upper .logo h2 {
+  font-size: 24px;
+  margin: 0 0 0 5px;
+}
+.navbar .upper .logo img {
+  max-width: 80px;
+}
+/* */
+.logo img{
+  width: 70px;
+  height: 35px;
+  
+}
+
+.navbar .upper .search_box {
+  padding: 0 20px;
+  max-width: 500px;
+  width: 100%;
+}
+.navbar .upper .search_box input {
+  padding: 10px 40px;
+  border-radius: 30px;
+  width: 100%;
+  color: #000;
+  background: url("./imgs/search.png") no-repeat;
+  background-size: 16px;
+  background-position: 10px;
+  border: 2px solid #e2dede;
+}
+.navbar .upper .search_box input::-moz-placeholder {
+  color: #e2dede;
+}
+.navbar .upper .search_box input:-ms-input-placeholder {
+  color: #e2dede;
+}
+.navbar .upper .search_box input::placeholder {
+  color: #e2dede;
+}
+.navbar .upper .icons {
+  display: flex;
+}
+.navbar .upper .icons .drop-down {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.navbar .upper .icons .drop-down img {
+  cursor: pointer;
+  max-width: 30px;
+  margin: 0 10px;
+}
+.navbar .upper .icons .drop-down .menu {
+  background: #fff6f6;
+  position: absolute;
+  top: 62px;
+  left: -150px;
+  z-index: 2;
+  padding: 20px;
+  width: 300px;
+  display: none;
+}
+.navbar .upper .icons .drop-down .menu h3 {
+  font-size: 16px;
+  text-align: start;
+}
+.navbar .upper .icons .drop-down .menu .book-list {
+  margin: 30px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.navbar .upper .icons .drop-down .menu .book-list .book {
+  display: flex;
+  align-items: center;
+  text-align: start;
+}
+.navbar .upper .icons .drop-down .menu .book-list .book img {
+  cursor: default;
+}
+.navbar .upper .icons .drop-down .menu .book-list .book h2 {
+  text-align: start;
+  font-size: 18px;
+  color: #676767;
+  margin: 0;
+  color: #000;
+}
+.navbar .upper .icons .drop-down .menu .book-list .book h2:hover {
+  color: #1b8bcc;
+}
+.navbar .upper .icons .drop-down .menu .book-list .book h3 {
+  font-size: 14px;
+  font-weight: 400;
+  margin: 3px 0 0 0;
+  color: #676767;
+}
+.navbar .upper .icons .drop-down .menu .book-list .book .navbar-price {
+  border: none;
+  margin: 20px 0 0 0;
+}
+.navbar .upper .icons .drop-down .menu .book-list .book .price h3 {
+  text-align: start;
+}
+.navbar .upper .icons .drop-down .menu .book-list .book img {
+  max-width: 100px;
+}
+.navbar .upper .icons .drop-down .menu .book-list input {
+  cursor: pointer;
+  margin: 20px 0 0 0;
+  padding: 10px;
+  border-radius: 50px;
+  border: 2px solid #1b8bcc;
+  color: #1b8bcc;
+  transition: all 0.3s ease;
+}
+.navbar .upper .icons .drop-down .menu .book-list input:hover {
+  background: #1b8bcc;
+  color: #fff;
+}
+.navbar .upper .icons .drop-down .menu .book-list hr:last-of-type {
+  display: none;
+}
+.navbar .upper .icons .drop-down .menu:hover {
+  display: block;
+}
+.navbar .upper .icons .drop-down .menu::before {
+  content: "";
+  display: block;
+  background: transparent;
+  position: absolute;
+  top: -40px;
+  height: 40px;
+  width: 100%;
+}
+.navbar .upper .icons .drop-down .menu::before:hover .menu {
+  display: block;
+}
+.navbar .upper .icons .drop-down:hover .menu {
+  display: block;
+}
+.navbar .links {
+  background: #ede9e9;
+}
+.navbar .links .container {
+  max-width: 630px;
+  margin: 0 auto;
+  padding: 15px 50px 0 50px;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  transition: all 0.3s ease;
+}
+.navbar .links .container li {
+  padding: 0 0 15px 0;
+  position: relative;
+}
+.navbar .links .container li::after {
+  content: "";
+  height: 4px;
+  background: #1b8bcc;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  transition: all 0.3s ease;
+}
+.navbar .links .container li:hover::after {
+  width: 100%;
+  left: 0;
+}
+.navbar .links .container .active {
+  border-bottom: 4px solid #1b8bcc;
+}
+.navbar .links .container .active a {
+  color: #1b8bcc;
+}
+.navbar .links .container .active:hover::after {
+  width: 0;
+}
+
+.book-list{
+  min-height: max-content;
+ max-height: 550px;
+  overflow: scroll;
+}
+#pfpimg{
+  border-radius: 50%;
+  max-width: 50px;
+  height: 50px;
+  padding: 1px;
+  border: #474747 1px solid;
+}

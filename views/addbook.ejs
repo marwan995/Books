@@ -1,0 +1,134 @@
+<head>
+    <link rel="stylesheet" href="../addbook.css" type="text/css">
+</head>
+
+<!--                    input Container              -->
+<div id="all"></div>
+
+<div id="mainFrame">
+    <form action='/newbook' method="post" id="addbooks">
+
+        <div id="balanceGender">
+            <div id="balance_gender">
+                <div id="title">
+
+                    <h2 class="centerText">Title</h2>
+                    <input type="text" placeholder="Title..." class="textInput Title" name="title" required>
+
+                </div>
+                <div id="date">
+                    <h2 class="centerText">Date</h2>
+                    <div id="dateInputs">
+                        <input type="text" placeholder="dd" class="textInput day" name="dd"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="2" min="01" max="31" pattern="^([1-9]|[12][0-9]|31)$" required>
+                        <input type="text" placeholder="mm" class="textInput month" name="mm"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="2" pattern="^(0[1-9]|10|11|12)$" required>
+                        <input type="text" placeholder="yyyy" class="textInput year" name="yyyy"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="4" pattern="^((1[1-9][1-9][1-9])|([2][0][0-5][0-9]))$" required>
+                    </div>
+
+                </div>
+                <div id="price_sequal">
+                    <div id="sequal">
+                        <h2 class="centerText">Sequel (If any)</h2>
+                        <input type="text" placeholder="sequel" class="textInput sequel" name="sequel">
+                    </div>
+                    <div id="sequal">
+                        <h2 class="centerText">Other Authors (If any)</h2>
+                        <input type="text" placeholder="Separated with , " class="textInput sequel" name="Author">
+                    </div>
+
+                </div>
+
+                <div id="age_Chaptercnt">
+                    <div id="Chaptercnt">
+                        <h2 class="centerText">Chapters</h2>
+                        <input type="text" placeholder="00" class="textInput Chapters" name="Chapters"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="3" min="01" required>
+                    </div>
+                    <div id="price">
+                        <h2 class="centerText">Price</h2>
+                        <input type="text" placeholder=" 00EGP" class="textInput price" name="price"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            required>
+                    </div>
+                    <div id="age">
+                        <h2 class="centerText">Age rating</h2>
+                        <input type="text" placeholder="00" class="textInput age" name="age"
+                            oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"
+                            maxlength="2" min="01">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="bookImgeFile">
+                <img src="../err" alt="" id="uploadedBook">
+                <img src="https://i.ibb.co/S6Zn431/uploadbook.png" alt="" id="loadingimg">
+                <input type="hidden" name="photo" id="coverUrl">
+
+                <p>Upload Your <br> Cover Here </p>
+            </div>
+
+
+            <input type="file" id="Bookfile" accept="image/*" onchange="loadBookCover(event)" class="postimg">
+
+        </div>
+        <textarea name="description" id="bookdes" cols="25" rows="8" placeholder=" Book Description ..."
+            required></textarea>
+
+
+
+        <!--                    tag.tag_name             -->
+        <h2 class="centerText" id="line">Tags</h2>
+        <div id="tagSection">
+            <input type="hidden" name="tags" value="itsme">
+            <% tags.forEach(tag=> { %>
+                <input type="checkbox" class="btn-check" id="btn-check-outlined<%=tag.tag_name%>" name="tags"
+                    value="<%= tag.tag_name%>">
+                <label class="btn btn-outline-primary" for="btn-check-outlined<%=tag.tag_name%>">
+                    <%=tag.tag_name%>
+                </label>
+                <% }) %>
+        </div>
+
+        <button type="submit" id="subBut">Add Book</button>
+
+    </form>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    document.getElementsByClassName("bookImgeFile")[0].addEventListener('click', () => {
+        document.getElementById("Bookfile").click();
+    })
+    let loadBookCover = async function (event) {
+
+        let coverImg = document.getElementById('uploadedBook');
+        let fileimage = document.getElementsByClassName('bookImgeFile')[0];
+        coverImg.style.opacity = 1
+        fileimage.style.border = 'none'
+        let filebook = document.getElementById('Bookfile');
+        let formbook = new FormData();
+        formbook.append("image", filebook.files[0])
+        let settingsBook = {
+            "url": "https://api.imgbb.com/1/upload?key=b79ad1c2e8b9883bd4de5f26d5b427bd",
+            "method": "POST",
+            "timeout": 0,
+            "processData": false,
+            "mimeType": "multipart/form-data",
+            "contentType": false,
+            "data": formbook
+        };
+        coverImg.src = '../imgs/loading.gif';
+        let bookcov = await axios(settingsBook)
+        document.getElementById('coverUrl').value = bookcov.data.data.display_url
+        coverImg.src = bookcov.data.data.display_url
+    };
+
+
+</script>

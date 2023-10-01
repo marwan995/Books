@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="icon" type="image/x-icon" href="../imgs/LOGO.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../style_admin.css">
+
+  <title>Users</title>
+</head>
+
+<body>
+  <div id="navleftbar">
+    <div class="line"></div>
+    <a href="/"><img src="../imgs/LOGO.png" alt="" id="logo"></a>
+    <div id="icons">
+     <a href="/admin"> <img src="../imgs/normal.png" alt=""></a>
+      <a href="/admin/users"><svg  class="iconnav" xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
+        class="bi bi-card-list" viewBox="0 0 16 16">
+        <path
+          d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
+        <path
+          d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z" /></a>
+          <a href="/admin/event">  <img src="../imgs/event.png" alt=""></a>
+        </svg> <svg class="iconnav" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+        class="feather feather-settings">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path
+          d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+        </path>
+      </svg>
+    </div>
+
+  </div>
+  <div id="content">
+    <div id="navbar">
+      <h1>Dashboard</h1>
+      <div id="notleft">
+        <img src="../imgs/notOn.png" alt="" id="not">
+
+        <p id="username" > <%= userIn.username %> </p>
+        <img src="<%= userIn.profile_pic %>" alt="" id="pfp">
+      </div>
+    </div>
+    <div id="users">
+        <% users.forEach(user => { %>
+         
+            <div class="user">
+              <div class="userleft">
+                <img src="<%= user.profile_pic%>" alt="">
+                <div class="cent">
+                  <div class="name">
+                    <h2 onclick="location.href='/profile/<%= user.username %>'" style="cursor: pointer;">
+                        <%= user.username%>
+                    </h2>
+                    <h4>(<%= user.first_name%>_<%= user.last_name%>)</h4>
+                  </div>
+                  <div class="userdata">
+                    <h3>Balance : <%=user.balance%></h3>
+                    <h3>Type :<%=user.user_type%> </h3>
+                  </div>
+                </div>
+              </div>
+              <div class="userbtns">
+                  <button class="Accept"onclick="setadmin('<%= user.user_id%>')" >Set as Admin</button>
+                  <button class="declined" onclick="DeleteUser('<%= user.user_id%>')">Delete User</button>
+              </div>
+            </div>
+        <% }) %>
+
+    </div>
+  
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="app.js"></script>
+  <script>
+  async function DeleteUser(i){
+    let x=await   axios({
+  method: 'delete',
+  url: '/deleteUser',
+  data: {
+  id:i
+  }
+});
+location.reload();
+   }
+   async function setadmin(i){
+    let x=await axios({
+  method: 'post',
+  url: '/admin/setAdmin',
+  data: {
+  id:i
+  }
+});
+location.reload();
+
+   }
+  </script>
+</body>
+
+</html>

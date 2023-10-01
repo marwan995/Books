@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="../LOGO.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+  <link rel="stylesheet" href="../../book_page_style.css" />
+  <link rel="stylesheet" href="../../footer.css" />
+  <title>
+    <%= book.title %> | <%= book.username %>
+  </title>
+</head>
+
+<body>
+  <%- include('partials/navbar', {q: "" , active: "Books" , cart: cart ,userIn}); %>
+    <div class="top">
+      <div class="to-sections">
+        <div class="desc">
+          <img src="<%= book.photo %>" alt="<%= book.title %>" class="mainBook" />
+          <div>
+            <h2 class="content-marg">
+              <%= book.title %>
+            </h2>
+            <p class="content-marg top-book-author" onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;">Author: <%= book.username %>
+            </p>
+            <div class="rate">
+              <div class="mainBook-rate">
+                <% for( let i=0; i < book.rating; i++ ) { %>
+                  <i class="fa-solid fa-star"></i>
+                  <% } %>
+                    <% for( let i=0; i < 5 - book.rating; i++ ) { %>
+                      <i class="fa fa-star-o"></i>
+                      <% } %>
+              </div>
+              <p class="content-marg">
+                <%= book.reviewsCnt %> reviews
+              </p>
+            </div>
+            <p class="content-marg price">$<%= book.price %>
+            </p>
+            <p class="content">
+              <%= book.description %>
+            </p>
+            <div class="btns">
+              <button class="circle" onclick="dec()">-</button>
+              <input class="circle" id="val" type="number" value="1" min="1" disabled />
+              <button class="circle" onclick="inc()">+</button>
+              <% if (userIn==null) { %>
+                <a href="/signin">
+                  <button class="btn" >ADD TO CART</button>
+                </a>
+              <% }else{%>
+                <button class="btn" onclick="sendtocart(<%=JSON.stringify(book.book_id)%>)">ADD TO CART</button>
+                <% } %> 
+              
+              <div class="space">
+                <hr class="line">
+              </div>
+              <form action="/borrow" method="post">
+                <input type="hidden" name="id" value="<%= book.book_id %>">
+             
+                <% if (userIn==null) { %>
+                  <a href="/signin">
+                    <button class="btn" type="button" >BORROW</button>
+                  </a>
+                <% }else{%>
+                  <button class="btn" type="submit" >BORROW</button>
+<% } %> 
+              </form>
+            </div>
+          </div>
+        </div>
+        <div>
+          <table class="table-desc">
+            <tr>
+              <td class="first-col">Book Title</td>
+              <td class="second-col">
+                <%= book.title %>
+              </td>
+            </tr>
+            <tr>
+              <td class="first-col">Author</td>
+              <td class="second-col" onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;">
+                <%= book.username %>
+              </td>
+            </tr>
+            <tr>
+              <td class="first-col">Date Published</td>
+              <td class="second-col">
+                <%= book.date_published %>
+              </td>
+            </tr>
+            <tr>
+              <td class="first-col">Chapter Count</td>
+              <td class="second-col">
+                <%= book.chapters %>
+              </td>
+            </tr>
+            <tr>
+              <td class="first-col">Tags</td>
+
+              <td class="second-col">
+                <%= book.tags[0].tag_name %>
+                  <% book.tags.slice(1).forEach(tag=> { %>
+                    - <%= tag.tag_name %>
+                      <% }) %>
+              </td>
+            </tr>
+          </table>
+        </div>
+        <h2 class="reviews-heading">Community reviews</h2>
+        <div class="comments">
+          <% if (book.reviews.length==0) { %>
+            <div id="temp" style="height: 100px;">
+               <h1>
+              There is no comments on this book yet
+           </h1>
+          
+            </div>
+           <% }%>
+          <% book.reviews.forEach(review=> { %>
+            <div class="review">
+              <img src="<%= review.profile_pic %> " alt="<%=review.username  %>" class="img-comm" />
+              <div class="comment-area">
+                <div class="name-with-rate">
+                  <p class="reviewer-name" onclick="location.href='/profile/<%= review.username %>'" style="cursor: pointer;">
+                    <%=review.username %>
+                  </p>
+                </div>
+                <p class="comment-date">
+                  <%=review.review_date %>
+                </p>
+                <p class="comment-text">
+                  <%= review.review_content%>
+                </p>
+              </div>
+            </div>
+            <% }) %>
+
+            <% if (userIn!=null) { %>
+
+              <form id="subnitform" method="post" action="/addcomment">
+                <div id="rati">
+                  <h2>Rate for this book:</h2>
+                  <div class="rating">
+                    <label>
+                      <input type="radio" name="rate" value="1" />
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="rate" value="2" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="rate" value="3" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="rate" value="4" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                    <label>
+                      <input type="radio" name="rate" value="5" />
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                      <span class="icon">★</span>
+                    </label>
+                  </div>
+                </div>
+           
+                    <div id="addComment">
+                      <textarea name="description" id="postdes" cols="25" rows="1"
+                        placeholder=" Add comment ..."></textarea>
+                      <button type="submit" id="commentPost"> Post</button>
+                    </div>
+                    <input type="text" style="display: none;" name="id" value="<%= book.book_id %>">
+                    <% } %>
+              </form>
+        </div>
+      </div>
+      <div class="side-bar">
+        <h2>Related Books</h2>
+        <div class="side-books-parent">
+          <% matched.forEach(sideBook=> { %>
+            <a href="../book/<%= sideBook.book_id %> " class="side-books">
+              <img src="<%= sideBook.photo %>" alt="" class="side-books-images" />
+              <div>
+                <p class="book-name">
+                  <%= sideBook.title %>
+                </p>
+                <p class="book-author">
+                  <%= sideBook.username %>
+                </p>
+                <p class="side-price">$<%= sideBook.price %>
+                </p>
+              </div>
+            </a>
+            <% }) %>
+
+        </div>
+      </div>
+    </div>
+    <%- include ('partials/footer') %>
+
+</body>
+
+<script>
+  function inc() {
+    document.getElementById('val').value++;
+
+  }
+  function dec() {
+    if (document.getElementById('val').value > 1)
+      document.getElementById('val').value--
+  }
+  function sendtocart(b) {
+    const xhr = new XMLHttpRequest();
+    let x = {};
+    x.qty = document.getElementById('val').value;
+    x.id = b;
+    xhr.open("POST", `/book/${x.id}`, true);
+    xhr.setRequestHeader("Content-Type", " application/json");
+
+    xhr.send(JSON.stringify(x));
+    location.reload();
+  }
+</script>
+
+</html>

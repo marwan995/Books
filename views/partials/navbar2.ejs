@@ -1,0 +1,106 @@
+<head>
+<link rel="stylesheet" href="../../nav2.css">
+</head>
+
+<form id="Changepass" method="post" action="/changepass">
+    <h2>Change Password</h2>
+
+    <div id="changein">
+      <label for="oldpass">Old Password</label>
+      <input type="password" required name="oldpass" id="oldpass" onfocusout="checkpass(this.value)">
+      <label for="Newpass">New Password</label>
+      <input type="password" required name="newpass" id="newpass">
+    </div>
+    <button type="submit" id="Changepassbtn">Change</button>
+    </div>
+  </form>
+  </form>
+  <% if (userIn!=null) { %>
+    <div id="dropDown">
+      <div id="tre"></div>
+      <div id="userDetiles">
+        <a href="/profile/<%=userIn.username%>"> <img src="<%= userIn.profile_pic%>" alt=""></a>
+        <div id="bottom">
+          <a href="/profile/<%=userIn.username%>">
+            <h3 onclick="location.href='/profile/<%= userIn.username %>'" style="cursor: pointer;">
+              <%= userIn.username %>
+            </h3>
+          </a>
+          <p>Balance : <%= userIn.balance%>EGP</p>
+        </div>
+      </div>
+
+      <div id="buttons">
+        <% if (userIn.user_type=='Admin') { %>
+
+          <a href="/admin"><button>Dashboard</button></a>
+          <% } %>
+            <button
+              onclick="document.getElementById('addmoney').style.display=document.getElementById('addmoney').style.display=='flex'?'none':'flex'">Add
+              Balance</button>
+            <form action="/addmoney" method="post" id="addmoney">
+              <input type="text" placeholder="Amount to add" name="money" id="moneyinput1"
+                oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" required
+                maxlength="10">
+              <input type="submit" value="Add Money" id="moneyinput2">
+            </form>
+         <button onclick="changepass()"> Change Password</button>
+            <form action="/loggout" method="post"><button onclick="location.reload()"> Logout</button></form>
+      </div>
+    </div>
+    <% } %>
+
+      <header style="flex-direction:<%=userIn==null?'row-reverse':'row'%>">
+        <div class="Div_logout">
+          <a href="/" class="logo">
+            <img src="https://i.ibb.co/5nRj5M6/Logo1.png" alt="" />
+          </a>
+          <% if (userIn==null) { %>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-fill"
+              viewBox="0 0 16 16">
+              <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+            </svg>
+
+            <a href="/signin/#mainFrame"><button class="user">Login</button></a>
+
+            <% } else { %>
+              <img src="<%= userIn.profile_pic %> " id="UserinImg" alt="">
+              <a href="/profile/<%=userIn.username  %>"><button class="user">
+                  <%= userIn.username %>
+                </button></a>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-key-fill"
+                viewBox="0 0 16 16">
+                <path
+                  d="M3.5 11.5a3.5 3.5 0 1 1 3.163-5H14L15.5 8 14 9.5l-1-1-1 1-1-1-1 1-1-1-1 1H6.663a3.5 3.5 0 0 1-3.163 2zM2.5 9a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+              </svg>
+              <form action="/loggout" method="post"> <button class="logout" type="submit">Logout</button></form>
+              <% } %>
+
+        </div>
+        <div style="  visibility:<%=userIn==null? 'hidden;':'visible;'%>"><button class="publish"
+            onclick="location.href='/cart'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="currentColor" class="bi bi-journal-check" viewBox="0 0 16 16">
+              <path fill-rule="evenodd"
+                d="M10.854 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />
+              <path
+                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+              <path
+                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+            </svg>Cart</button>
+            <% if (userIn!=null&&userIn.user_type!='Reader') { %>
+             
+         
+          <button class="reader" onclick="addbook()"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="currentColor" class="bi bi-journal-text" viewBox="0 0 16 16">
+              <path
+                d="M5 10.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5zm0-2a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z" />
+              <path
+                d="M3 0h10a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-1h1v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H3a1 1 0 0 0-1 1v1H1V2a2 2 0 0 1 2-2z" />
+              <path
+                d="M1 5v-.5a.5.5 0 0 1 1 0V5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0V8h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1zm0 3v-.5a.5.5 0 0 1 1 0v.5h.5a.5.5 0 0 1 0 1h-2a.5.5 0 0 1 0-1H1z" />
+            </svg>Add Book</button>
+            <% } %>
+        </div>
+      </header>
+      <%- include ('../addbook',{tags}) %>
+

@@ -1,0 +1,179 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background: #ffff;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  a{
+    text-decoration: none;
+  }
+  
+#borrrowedbooks{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    gap:30px;
+    flex-direction: column;
+padding:30px ;
+
+}
+h4 {
+  margin-top: 0;
+  color: #0e0e0e9a;
+  margin: 0;
+}
+button {
+  border:#8b000b solid 2px;
+  color: #8b000b;
+  padding: 5px 20px;
+  border-radius: 2px;
+  font-size: 16px;
+background-color: transparent;
+transform: scale(1.1);
+transition: .5s;
+}
+button:hover {
+  border:#8b000b solid 2px;
+  color: #ffff;
+  padding: 5px 20px;
+  font-size: 16px;
+background-color: #8b000b;
+}
+.show_books_btns{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 90%;
+}
+#show_BOOK {
+
+    width: 700px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0px 0px 5px #03030377;
+    height: 300px;
+    width: 800px;
+    display: table;
+  }
+  
+  #show_cont {
+    display: flex;
+    flex-direction: row;
+    gap:20px;
+    height: 300px;
+
+    white-space: normal;
+  }
+  
+  #show_info_cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 5px;
+    justify-content: space-between;
+
+  
+  }
+  
+  #show_img {
+    height: 100%;
+    width: 30%;
+  }
+  
+  #show_BOOK img {
+    height: inherit;
+     aspect-ratio: 23/14; 
+    border-radius: 8px 0 0 8px;
+  }
+  
+  #show_BOOK p {
+    padding: 10px 20px;
+    padding-left: 0;
+  
+  }
+  .rating img:hover {
+    box-shadow: none;
+    cursor: default;
+  }
+  .rating img {
+    width: 25px;
+    height: 25px;
+  }
+  #show_info_cont h1{
+    background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+    font-size: 28px;
+  }
+  h6 {
+ color: #8b000b;
+    margin: 0;
+    font-size: 28px;
+  }
+  .line{
+    width: 500px;
+    height: 1px;
+    background-color: #00004462;
+  }
+  #temp{
+    height: 500px;
+    width: 100%;
+    font-size: 32px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+  }
+  #temp button{
+    background-color: #151a27;
+    color: white;
+border-color:#151a27 ;
+cursor: pointer;
+  }
+  #temp button:hover{
+    background-color: #2b3d6a;
+   
+  }
+  #temp h1{
+    background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+
+  }
+  #Error{
+    border: 3px #349c34c7 solid;
+    color: #349c34;
+    width: 400px;
+    display: block;
+    margin: 10px auto;
+    padding: 20px 10px;
+    font-size: 18px;
+    background-color: #349c342e;
+    text-align: center;
+    font-weight: 600;
+    transition: 1s;
+    position: absolute;
+    left:75%;
+    top:300px;
+    animation: mov 2s ;
+    animation-iteration-count: 1;
+}
+@keyframes mov {
+  0%{
+    left: 100%;
+  }
+  100%{
+    left:75%;
+  }
+  
+}

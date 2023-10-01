@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="icon" type="image/x-icon" href="LOGO.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="../../orders.css">
+  <link rel="stylesheet" href="../../footer.css" />
+
+
+  <title>Past Orders</title>
+</head>
+
+<body>
+  <%- include('partials/navbar', {q: "" , active: "Books" , cart: cart ,userIn}); %>
+  <section class="sec3">
+    <h2>Past Orders</h2>
+    <table>
+      <tr>
+        <td>NO</td>
+        <td>Book Cover</td>
+        <td>Date</td>
+        <td>BookName</td>
+        <td>Author</td>
+        <td>Price</td>
+        <td>Quantity</td>
+        <td>Total</td>
+      </tr>
+      <% let cnt=1 %> 
+      <% orders.forEach(book => { %>
+       
+        <tr>
+          <td><%= cnt %><% cnt++ %></td>
+          <td><img src="<%= book.photo %>" alt="Book Photo"></td>
+          <td><%= book.date_published %></td>
+          <td><%= book.title %></td>
+          <td onclick="location.href='/profile/<%= book.authorname %>'" style="cursor: pointer;"><%= book.authorname %> </td>
+          <td><%= book.price %> </td>
+          <td><%= book.qty %></td>
+          <td><%= book.total %></td>
+        </tr>
+      <% }) %>
+     
+    </table>
+  </section>
+  </div>
+  <%- include ('partials/footer') %>
+
+  <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+  
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="appDash.js"></script>
+</body>
+
+</html>

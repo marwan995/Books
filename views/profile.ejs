@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="../LOGO.png">
+    <link rel="stylesheet" href="../footer.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../Profile_style 2.css">
+    <link rel="stylesheet" href="../Profile_Blogstyle.css">
+    <title>
+        <%=profileuser.username%>
+    </title>
+</head>
+
+<body>
+    <div id="all"></div>
+    <%- include('./partials/navbar2', {userIn})%>
+    
+
+    <div class="temp"></div>
+
+    <section class="sec1" style="  background-image: url('<%=profileuser.cover%>');">
+        <div  > 
+            <div class="file-image1">
+                <img src="../t.png" alt="" id="uploadedImg1">
+                <img src="https://i.ibb.co/PCMFMjQ/editimg.png" alt="" id="tempimg1">
+                <input type="file" id="inputPostimg1"accept="image/*" onchange="loadcover(event)"
+                    class="postimg1" required>
+                <p>Upload Your Cover </p>
+            </div>
+        </div>
+    </section>
+
+
+    <form action="/editProfile" method="post" id="x">
+        <section class="sec2">
+            <div class="lol">
+                <div class="img">
+                    <input type="hidden" name="cover" id="imageUrl1" >
+
+                    <img src="<%= profileuser.profile_pic %> " alt="" id="pfp">
+                    <div class="file-image">
+                        <img src="../t.png" alt="" id="uploadedImg">
+                        <img src="https://i.ibb.co/bsdtG1k/upload.png" alt="" id="tempimg">
+                        <input type="text" name="photo" id="imageUrl" style="display: none;">
+                        <input type="file" id="inputPostimg"  accept="image/*" onchange="loadFile(event)"
+                            class="postimg2" required>
+                        <p>Upload Your Image </p>
+                    </div>
+                </div>
+                <div style="width: 210px; height: 210px;"></div>
+
+                <div class="autordata">
+                    <div class="name">
+                    
+                        <div id="editname">
+
+                            <input type="text" name="username" id="Edittitle" maxlength="15">
+                            <h1 onclick="location.href='/profile/<%= profileuser.username %>'" style="cursor: pointer;">
+                                <%= profileuser.username %>
+                            </h1>
+                        </div>
+                        <h4>(<%= profileuser.first_name %>_<%= profileuser.last_name %>) </h4>
+                    </div>
+                    <div class="d1">
+                        <h4>
+                            <%= profileuser.user_type %>
+                        </h4>
+
+                        <div class="d2">
+                            <h4> Reviews : <%= Revcount %></h4>
+                            <h4> Blogs : <%= BlogCount %></h4>
+                        </div>
+                        <div class="d3">
+                            <i class="material-icons">location_on</i>
+                            <p>Giza ,Egypt</p>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <% if (userIn!=null&&userIn.username==profileuser.username) { %>
+             
+                <div id="editbutton"> 
+                <button class="edit" id="editpfp"></button>
+                <button id="SubmitEdit" type="submit" onclick="edit()"> Edit</button>
+                <button id="SubmitEdit" type="reset" onclick="Cancel()"> Cancel</button>
+            </div>
+                <% } %>
+        </section>
+
+    </form>
+
+    <section class="sec4" id="sec4">
+        <div class="authorr">
+            <div class="authorright">
+
+                <div class="authordone">
+                    <ul class="contaier">
+                        <li id="New_Arrivals" class="blogss" onclick="movetoplace(this.id)">Blog</li>
+                        <li id="deals" class="bookss" onclick="movetoplace(this.id)">Books </li>
+                    </ul>
+                </div>
+                <section class="sec5">
+
+                    <% if (blog.length==0) { %>
+                        <div id="temp" style="height: 100px; ">
+                           <h1>
+                           There is no blogs yet to be shown...
+                       </h1>
+                      
+                        </div>
+                       <% }%>
+                    <% blog.forEach(blg=> { %>
+                        <div class="post <%= blg.blog_id %>">
+                            <div class="blog ">
+                                <div id="topwithHeader">
+                                    <h2 id="<%=blg.user_id%>">
+                                        <%= blg.blog_title %>
+                                    </h2>
+                                    <div id="blogRight">
+                                        <h4>
+                                            <%= blg.date_posted %>
+                                        </h4>
+                                        <div class="dropmenu <%= blg.id %>">
+                                            <button
+                                                onclick="editBlog('<%=blg.blog_id%>','<%=blg.title%>')">Edit</button>
+                                            <button onclick="deleteBlog('<%= blg.blog_id %>')">Delete</button>
+                                        </div>
+                                        <button class="edit_delete" id="<%= blg.blog_id %>"
+                                            onclick="edit_delete('this.id,<%=(userIn!=null&&(userIn.username==profileuser.username)&&(blg.user_id==userIn.user_id))?1:0%>')"></button>
+                                    </div>
+                                </div>
+                                <div class="blog_contant">
+                                    <div class="leftblog_contant">
+                                        <img src="<%= blg.photo%>" alt="<%= blg.title%>"
+                                            onclick="location.href='/book/<%=blg.book_id%>'">
+                                        <div class="rating">
+                                            <% for( let i=0; i < blg.rating; i++ ) { %>
+                                                <img src="../imgs/star.png" alt="" />
+                                                <% } %>
+                                                    <% for( let i=0; i < 5 - blg.rating; i++ ) { %>
+                                                        <img src="../imgs/star (1).png" alt="" />
+                                                        <% } %>
+                                        </div>
+                                    </div>
+                                    <div class="bruh">
+                                        <p>
+                                            <%= blg.description %>
+                                        </p>
+                                        <a href="/book/<%= blg.book_id %>">View book details ...</a>
+                                    </div>
+                                </div>
+                                <div class="down" onclick="location.href='/profile/<%= profileuser.username %>'" style="cursor: pointer;"> 
+                                    <h4> by <%= profileuser.username %>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <% }) %>
+                </section>
+                <div class="authorBooks">
+                    <h2 class="mybooks">My Books</h2>
+                    <% if (books.length==0) { %>
+                        <div id="temp" style="height: 100px;">
+                           <h1>
+                          There is no Books yet
+                       </h1>
+                      
+                        </div>
+                       <% }%>
+                    <div class="thebooks">
+                        <% books.forEach(book=> { %>
+                            <div class="onebook">
+                                <img src="<%= book.photo %>" alt="" id="<%= book.book_id %>"
+                                    onclick="viewbook(this.id)">
+                                <h5 class="bookname">
+                                    <%= book.title %>
+                                </h5>
+                                <h6 onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;">
+                                    by :
+                                    <%=book.username%>
+                                </h6>
+                                <p>$<%=book.price %>
+                                </p>
+                            </div>
+                            <% }) %>
+
+
+                    </div>
+                </div>
+            </div>
+            <div class="authorleft">
+
+                <div class="Morebooks">
+
+                    <div class="recent">
+                        <h2> Recent Books</h2>
+                        <div class="booksrecent recent">
+
+                            <% recentBooks.forEach(b=> { %>
+                                 <img src="<%= b.photo %>" alt="" id="<%= b.book_id %>" onclick="viewbook(this.id)">
+                                
+                                <% }) %>
+                        </div>
+                    </div>
+                    <div class="recent s1">
+                        <h2> Best Books</h2>
+                        <div class="books arrival" style="    justify-content: flex-start;">
+
+                            <% bestBooks.forEach(b=> { %>
+                                <img src="<%= b.photo %>" alt="" id="<%= b.book_id %>" onclick=" location.href = `/book/<%= b.book_id %>`">
+
+                                <% }) %>
+                        </div>
+                    </div>
+                    <div class="recent s2">
+                        <h2> Tags</h2>
+                        <div class="tags">
+                            <% tag.forEach(t=> { %>
+                                <a href="/searchtag?q=''&tag=<%=t.tag_name%>"> <button class="tag">
+                                        <%=t.tag_name%>
+                                    </button>
+                                    <% }) %>
+                                </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </section>
+    <%- include ('partials/footer') %>
+
+        <script src="../Profile_App.js">
+        </script>
+
+</body>
+
+</html>

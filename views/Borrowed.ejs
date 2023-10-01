@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../LOGO.png">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+    />
+    
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+      <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+      />
+    <link rel="stylesheet" href="../../footer.css"/>
+    <link rel="stylesheet" href="../../borrowed_style.css">
+    <title>Borrowed Books</title>
+  </head>
+<body>
+    
+    <%- include('partials/navbar', {q: "" , active: "" ,userIn});%>
+<div id="borrrowedbooks">
+    <% if (NotReturned.length==0&&Returned.length==0) { %>
+     <div id="temp">
+        <h1>
+        You Didn't Borrow Any Book Yet 
+    </h1>
+   <a href="/search"><button>Borrow a Book</button></a>
+     </div>
+    <% } %>
+    <% NotReturned.forEach(book=> { %>
+        <form id="show_BOOK" method="post" action="/returnbook">
+          <div id="show_cont">
+            <img src="<%= book.photo %>" alt="<%= book.title%>" id="show_img">
+    
+            <div id="show_info_cont">
+              <div class="bookdata">
+                <h1>
+                  <%= book.title %>
+                </h1>
+                <h4 onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;">
+                    By :
+                  <%= book.username %>
+                </h4>
+                <p><%=book.description.length>280?book.description.substring(0,280)+"...": book.description%></p>      
+              </div>
+              <div class="show_books_btns">
+                <h6><%= book.return_date %> </h6>
+                <input type="text" style="display: none;" name="id" value="<%=book.book_id%>">
+            <button type="submit">Return </button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <% }) %>
+        <% if (NotReturned.length!=0) { %>
+         
+            <div class="line"> </div>
+        <% } %>
+        <% Returned.forEach(book=> { %>
+    <form id="show_BOOK" >
+      <div id="show_cont">
+        <img src="<%= book.photo %>" alt="<%= book.title%>" id="show_img">
+
+        <div id="show_info_cont">
+          <div class="bookdata">
+            <h1>
+              <%= book.title %>
+            </h1>
+            <h4 onclick="location.href='/profile/<%= book.username %>'" style="cursor: pointer;">
+                By :
+              <%= book.username %>
+            </h4>
+            <p><%=book.description.length>280?book.description.substring(0,280)+"...": book.description%></p>      
+          </div>
+          <div class="show_books_btns">
+            <h6 style="color: #349c34;"><%= book.return_date %> </h6>
+          <h6 style="color: #349c34;"> Successfully Returned</h6>
+          </div>
+        </div>
+      </div>
+    </form>
+    <% }) %>
+</div>
+<% if(messages && messages.length) {%>
+  <h2 id="Error"><%= messages %></h2>
+<% } %>
+
+    <%- include ('partials/footer') %>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+      setTimeout(()=>{
+        document.getElementById('Error').style.display='none'
+      },5000)
+    
+    </script>
+</body>
+</html>

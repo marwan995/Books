@@ -1,0 +1,224 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: #000;
+}
+.filters h3 {
+  margin-right: 20px;
+}
+.navbar {
+  background: #fff;
+}
+.navbar .upper {
+  padding: 20px 50px;
+  max-width: 1300px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  background: #fff;
+}
+.navbar .upper .logo {
+  text-decoration: none;
+  color: #474747;
+  display: flex;
+  align-items: center;
+}
+.navbar .upper .logo h2 {
+  font-size: 24px;
+  margin: 0 0 0 5px;
+}
+.navbar .upper .logo img {
+  max-width: 50px;
+}
+.navbar .upper .search_box {
+  padding: 0 20px;
+  max-width: 500px;
+  width: 100%;
+}
+.navbar .upper .search_box input {
+  padding: 10px 40px;
+  border-radius: 30px;
+  width: 100%;
+  color: #000;
+  background: url("./imgs/search.png") no-repeat;
+  background-size: 16px;
+  background-position: 10px;
+  border: 2px solid #e2dede;
+}
+.navbar .upper .search_box input::-moz-placeholder {
+  color: #e2dede;
+}
+.navbar .upper .search_box input:-ms-input-placeholder {
+  color: #e2dede;
+}
+.navbar .upper .search_box input::placeholder {
+  color: #e2dede;
+}
+.navbar .upper .icons {
+  display: flex;
+}
+.navbar .upper .icons img {
+  max-width: 30px;
+  margin: 0 10px;
+  cursor: pointer;
+}
+.navbar .links {
+  background: #ede9e9;
+}
+.navbar .links .container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 15px 50px 0 50px;
+  display: flex;
+  justify-content: space-between;
+  list-style: none;
+  transition: all 0.3s ease;
+}
+.navbar .links .container li {
+  padding: 0 0 15px 0;
+  position: relative;
+}
+.navbar .links .container li::after {
+  content: "";
+  height: 4px;
+  background: #1b8bcc;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  transition: all 0.3s ease;
+}
+.navbar .links .container li:hover::after {
+  width: 100%;
+  left: 0;
+}
+.navbar .links .container .active {
+  border-bottom: 4px solid #1b8bcc;
+}
+.navbar .links .container .active a {
+  color: #1b8bcc;
+}
+.navbar .links .container .active:hover::after {
+  width: 0;
+}
+
+.search {
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 40px 50px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.search .filters {
+  min-width: -webkit-max-content;
+  min-width: -moz-max-content;
+  min-width: max-content;
+}
+.search .filters h3 {
+  font-size: 24px;
+}
+.search .filters h3:not(:nth-child(1)) {
+  margin: 50px 0 0 0;
+}
+.search .filters li {
+  color: #434343;
+  list-style: none;
+  margin: 15px 30px;
+  cursor: pointer;
+}
+.search .filters .active {
+  color: #1b8bcc;
+}
+.search .books {
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  width: 100%;
+  justify-items: end;
+}
+.search .filters li:hover {
+  color: #1b8bcc;
+
+}
+.search .books .book {
+  cursor: pointer;
+  min-width: 220px;
+  width: 260px;
+  max-height: 650px;
+  max-width: 270px;
+  transition: 0.3s all ease;
+}
+.search .books .book .cover {
+   height: 400px;
+  overflow: hidden;
+}
+.search .books .book .book-content {
+  padding: 0 10px 20px 10px;
+}
+.search .books .book .book-content h3 {
+  margin: 10px 0 5px 0;
+  color: #3d3d3d;
+  font-weight: 600;
+}
+.search .books .book .book-content h4 {
+  font-size: 14px;
+  color: #cdcaca;
+  font-weight: 400;
+}
+.search .books .book .book-content .price {
+  font-weight: 400;
+}
+.search .books .book .book-content .book-rating {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.search .books .book .book-content .book-rating .rating {
+  display: flex;
+}
+.search .books .book .book-content .book-rating .rating img {
+  max-width: 20px;
+  margin: 0 3px 0 0;
+}
+.search .books .book:hover {
+  box-shadow: 0px 0px 10px #1b8bcc;
+}/*# sourceMappingURL=style.css.map */
+#temp{
+  height: 500px;
+  width: 1000px;
+  font-size: 32px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+}
+#temp button{
+  background-color: #151a27;
+  color: white;
+border-color:#151a27 ;
+cursor: pointer;
+}
+#temp button:hover{
+  background-color: #2b3d6a;
+ 
+}
+#temp h1{
+  background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-align: center;
+
+}

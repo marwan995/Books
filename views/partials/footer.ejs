@@ -1,0 +1,120 @@
+
+<footer>
+    <div id="footertop">
+      <div class="footerLeft">
+        <div class="header"><i class="fa fa-book" style="color: white;"></i>
+          <h2 class="booksh2">BOOKS</h2>
+        </div>
+        <p> Good friends, good books</p>
+        <div id="icons">
+          <a href="#" class="fa fa-facebook"></a>
+          <a href="#" class="fa fa-twitter"></a>
+          <a href="#" class="fa fa-youtube"></a>
+          <a href="#" class="fa fa-instagram"></a>
+        </div>
+      </div>
+      <div id="footerCenter">
+        <div class="header">
+          <i class="fa fa-compass"></i>
+          <h2 class="booksh2">Our main Office</h2>
+        </div>
+        <p>Cairo University ,Giza Egypt</p>
+        <p>P.O.BOX:55324</p>
+        <p>Phone:0112050165</p>
+        <p>Mail:Example@gmail.com</p>
+      </div>
+      <div id="footerCenter">
+        <div class="header">
+          <i class="fa fa-info-circle"></i>
+          <h2 class="booksh2">About us</h2>
+        </div>
+        <p>Partner with us</p>
+        <p>Terms and Conditions</p>
+        <p>Cookies</p>
+      </div>
+      <div id="footerCenter">
+        <div class="header">
+          <i class="fa fa-plus-square"></i>
+          <h2 class="booksh2">features</h2>
+        </div>
+        <p>Upcoming Events</p>
+        <p>Coming Books</p>
+        <p>New Authors</p>
+      </div>
+    </div>
+    <hr>
+    <div id="footerbot">
+      <p> Books is a virtual books shop </p>
+      <p> Copyrights@2021-2022,the new web made by US</p>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script async src="https://api.countapi.xyz/hit/bookShop/70d7165d-7f27-414f-99c6-1fac599f29b1?callback=websiteVisits"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeonsite/1.2.1/timeonsitetracker.min.js"></script>
+  
+  <script type="text/javascript">
+    let now=new Date;
+    let visits=0;
+    function websiteVisits(response) {
+      visits=response.value
+}
+    var Tos;
+    (function(d, s, id, file) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.onload = function() {
+          var config = {
+trackBy: 'seconds',
+callback: async function(data) {
+ if(now.getHours()==24){
+  await axios({
+  method: 'get',
+  url: 'https://api.countapi.xyz/set/bookShop/70d7165d-7f27-414f-99c6-1fac599f29b1?value=0',
+  data: {
+  id:4
+  } })
+}
+
+data.visits=visits;
+
+  // give your endpoint URL/ server-side URL that is going to handle your TOS data which is of POST method. Eg. PHP, nodejs or python URL which saves this data to your DB
+
+  var endPointUrl = 'http://localhost:8000/test'; // replace with your endpoint URL
+
+  if (data && data.trackingType) {
+      if (data.trackingType == 'tos') {
+          if (Tos.verifyData(data) != 'valid') {
+              console.log('Data abolished!');
+              return; 
+          }
+      }
+       // makes use of sendBeacon API in your browser.
+      if (navigator && typeof navigator.sendBeacon === 'function') {
+          var blob = new Blob([JSON.stringify(data)], {type : 'application/json'});
+        
+          navigator.sendBeacon(endPointUrl, blob);
+      }
+  }
+}};
+            if (TimeOnSiteTracker) {
+                Tos = new TimeOnSiteTracker(config);
+            }
+        };
+        js.src = file;fjs.parentNode.insertBefore(js, fjs);
+    } (document, 'script', 'TimeOnSiteTracker', 'timeonsitetracker.min.js'));
+  
+    
+    function sendtocart(i){    
+      axios({
+  method: 'post',
+  url: `/book/${i}`,
+  data: 
+    {id:i,qty:1}
+  
+})
+      
+    }
+  </script>

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+  integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+  />
+  
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+    />
+  <link rel="icon" type="image/x-icon" href="LOGO.png">
+
+  <link rel="stylesheet" href="../../style_events.css" />
+  <link rel="stylesheet" href="../footer.css">
+  <title>Events</title>
+</head>
+
+<body>
+  <%- include('partials/navbar', {q: "", active: "Events"}); %>
+  <div class="events">
+    <div class="container">
+      <h1>Events</h1>
+      <div class="events-list">
+        <% events.forEach(event=> { %>
+          <form class="event" id="<%= event.event_id %>" action="/bookticket" method="post">
+            <div class="event-image">
+              <img src="<%= event.event_photo %> " alt="" />
+            </div>
+            <div class="event-content">
+              <div class="location">
+                <img src="../imgs/location (1).png" alt="" />
+                <p>
+                  <%= event.place %>
+                </p>
+              </div>
+              <div class="date">
+                <img src="../imgs/calendar.png" alt="" />
+                <p>
+                  <%= String(event.due_to).substring(0,15) %>
+                </p>
+              </div>
+              <h2>
+                <%= event.title %>
+              </h2>
+              <h3>
+                <%= event.description %>
+              </h3>
+              <div class="footer">
+                <% if (event.tickets>= 10) { %>
+                  <h4>
+                    <%= event.tickets %> Tickets left
+                  </h4>
+                  <% } else { %>
+                    <h4 class="danger">
+                      <%= event.tickets %> Tickets left
+                    </h4>
+                    <% } %>
+                    <input type="hidden" name="event_id" value="<%=event.event_id %>">
+                      <input type="submit" value=<%=check.includes(event.event_id )?"Booked":"Book" %> <% if (check.includes(event.event_id )) { %>
+                        disabled
+                        style="
+                        background: #e2dede;
+                        color: #00000061;
+                        border: 2px solid #e2dede;
+                        cursor:not-allowed;
+                    
+                        "
+                         
+                      <% } %>    <%if(userIn==null){%>
+                        style="
+                        display:none;
+                        "
+                        <%}%> />
+              </div>
+            </div>
+          </form>
+          <% }) %>
+      </div>
+    </div>
+  </div>
+  <% if(messages && messages.length) {%>
+    <h2 id="Error"><%= messages %></h2>
+  <% } %>
+  <%- include ('partials/footer') %>
+</body>
+<script>
+  setTimeout(()=>{
+    document.getElementById('Error').style.display='none'
+  },5000)
+
+</script>
+</html>

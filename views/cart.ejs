@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css"
+    integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="icon" type="image/x-icon" href="LOGO.png">
+
+  <link rel="stylesheet" href="footer.css">
+  <link rel="stylesheet" href="cart.css" />
+  <title>Shopping Cart</title>
+</head>
+
+<body>
+  <% let total=0 %>
+    <%- include('partials/navbar', {q: "" , active: "" }); %>
+
+      <div class="top">
+        <p class="sh-ca">SHOPPING CART</p>
+      </div>
+      <div>
+        <div class="table-row">
+          <p class="table-left">ITEMS</p>
+          <div class="table-right">
+            <p>QUANTITY</p>
+            <p>PRICE</p>
+            <p>TOTAL</p>
+          </div>
+        </div>
+        <% cart.forEach(book=> { %>
+          <div class="table-row-cont" id="<%= book.book_id %>">
+            <div class="items-cont">
+              <img src="<%= book.photo %>" alt="" class="book-img" />
+              <div class="book-details">
+                <p class="book-name">
+                  <%= book.title %>
+                </p>
+                <p class="book-author">
+                  <%= book.username %>
+                </p>
+              </div>
+            </div>
+            <div class="table-right2">
+              <div>
+                <i class="fa-solid fa-chevron-down" onclick="decqty(<%=JSON.stringify(book.order_id)%>)" ></i>
+                <input type="number" value="<%= book.qty %>" min="1" disabled>
+                <i class="fa-solid fa-chevron-up" onclick="incqty(<%=JSON.stringify(book.order_id)%>)"></i>
+              </div>
+              <p class="p1">$<%= book.price %>
+              </p>
+              <p class="p2">$<%= book.qty * book.price %>
+                  <% total+=book.qty * book.price %>
+              </p>
+              <span>
+                <i class="fas fa-times-circle" onclick="removeCart(<%=JSON.stringify(book.order_id)%>)"></i>
+              </span>
+            </div>
+          </div>
+          <p class="hr">
+            <% }) %>
+      </div>
+
+      <div class="sub-total-out">
+        <div></div>
+        <div class="sub-total-in">
+          <p>Subtotal</p>
+          <p>EG 256</p>
+        </div>
+      </div>
+      <div class="sub-total-out">
+        <div></div>
+        <div class="total-in">
+          <p>TOTAL</p>
+          <p>EG <%= total.toFixed(2) %>
+          </p>
+        </div>
+      </div>
+      <div class="btns-bottom-par">
+        <div></div>
+        <div class="btns-bottom">
+          <a href="/myOrders" class="btn-shop">MY LAST ORDERS</a>
+          <button onclick=" <% if(userIn==null){%>location.href='/sigin' <%}else{%> checkOut('<%=userIn.user_id%>','<%=total%>')<% } %> " class="btn-check">PROCESS CHECKOUT</button>
+        </div>
+      </div>
+      </div>
+      <%- include ('partials/footer') %>
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+        <script>
+
+
+          function removeCart(c) {
+            fetch('/delete', {
+              method: 'DELETE',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({id:c })
+            }).then(()=>{
+              location.reload();
+            });
+          }
+            function  incqty(c)  {
+            // const xhr = new XMLHttpRequest();
+            fetch('/putinc', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({id:c })
+            }).then(()=>{
+
+        
+              location.reload();
+            });
+            // xhr.open("PUT", `/put`, true);
+            // xhr.setRequestHeader("Content-Type", " application/json");
+            // xhr.send(JSON.stringify(c));
+          }
+          function decqty(c) {
+            fetch('/putdec', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({id:c })
+            }).then(()=>{
+
+              location.reload();
+            });
+         
+          }
+          function checkOut(c,total) {
+         
+          axios({
+  method: 'post',
+  url: '/checkOut',
+  data: {
+  id:c,cost:parseInt(total)
+  }
+}).then(res=>{
+  location.reload();
+});
+          }
+          
+        </script>
+</body>
+
+</html>

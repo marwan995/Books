@@ -1,0 +1,53 @@
+*{
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Montserrat', sans-serif;
+}
+
+.error_box{
+     background-color: white;
+     width: 700px;
+     height: 450px;
+  margin: auto ;
+  margin-bottom: 100px;
+     padding: 10px;
+}
+.error_box p{
+     text-align: center;
+}
+.e404{
+     font-size: 170px;
+          font-weight: 600;
+     background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.oops{
+     font-size: 32px;
+     font-weight: bold;
+}
+.messege{
+     font-size: 20px;
+     padding: 20px 60px;
+}
+.btns-box{
+    display: flex;
+    justify-content: center;
+}
+.btns{
+     margin: 0 15px;
+     width: 170px;
+     height: 40px;
+     outline: none;
+     border: 2px solid;
+     border-radius: 30px;
+     color: white;
+     font-weight: 600;
+}
+.home-btn{
+     background-color: rgb(4, 147, 204);
+}
+.home-btn:hover{
+     background-color: #000440;
+}

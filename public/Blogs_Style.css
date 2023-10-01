@@ -1,0 +1,442 @@
+*{
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+}
+ body{
+background: #f1f1f1;
+min-height: 100vh;
+}
+#all {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  filter: blur(10);
+  display: none;
+  z-index: 12;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+
+.post{
+  width: 500px;
+
+}
+#blogRight{
+  display: flex;
+  align-items: center;
+
+}
+#blogRight h4{
+margin-right: 15px;
+}
+.dropmenu{
+  position: absolute;
+  display: none;
+}
+.dropmenu button{
+  position: relative;
+  left:200px
+}
+.dropmenu button:nth-child(1){
+  border: 3px solid #000440;
+  color: white;
+  background-color: #000440;
+  margin-right: 5px;
+  box-shadow: 1px 5px 8px -5px #000440;
+}
+.dropmenu button:nth-child(1):hover{
+  border: 3px solid #000bab;
+  color: white;
+  background-color: #000bab;
+  box-shadow: 1px 5px 8px -5px #000bab;
+}
+#blogRight .edit_delete{
+  width: 32px;
+  height: 32px;
+  background-image: radial-gradient(circle, #000440 3px, transparent 3px);
+  background-size: 100% 33.33%;
+  border: none;
+transform: rotate(90deg);
+  /* border: 3px solid #000440;
+  background-color: #000440;
+  box-shadow: 1px 5px 8px -5px #000440; */
+}
+#blogRight .edit_delete:hover{
+  
+  border: none;
+  background-color: transparent;
+  box-shadow:none;}
+.post h2{
+  background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.imgPOSt{
+  max-height: 5x00px;
+  max-width: inherit;
+  aspect-ratio: 2/1;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0;
+}
+.post h5,.post h6{
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -10px;
+  background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: "Segoe UI",Arial,sans-serif;
+  font-weight: 400;
+}
+.post,#CreatPost,#EditPost{
+    display: table;
+    padding: 5px;
+    border-radius: 10px;
+    width: 810px;
+    height: 330px;
+    background-color: rgb(255, 255, 255);
+    margin-bottom: 20px;
+
+}
+#EditPost{
+  position: fixed;
+  top: 26%;
+  left: 26%;
+  z-index: 15;  
+  display: none;
+}
+
+#EditPost h2{
+  background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.usernameDate h2 {
+margin-bottom: 0;
+padding-bottom: 0;
+text-align: end;
+}
+
+
+#head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row-reverse;
+    
+}
+#Right{
+    display: flex;
+    flex-direction: row;
+    flex-direction: row-reverse;
+}
+#dot{
+    align-self: flex-start;
+    text-align: center;
+    border: none;
+    padding: 10px;
+    padding-top: 0;
+    font-weight: 1000;
+    z-index: 0;
+    font-size: 20px;  
+}
+
+
+ 
+
+.post h2::after{
+  display: none;
+  transform: scaleX(0);
+}
+
+
+#postdes{
+    display: block;
+    width:100%;
+    margin: 10px 0;
+    
+}
+#Postusername{
+    border-radius: 20px;
+    padding: 8px 12px;
+    outline: none;
+    border: none;
+    background-color:rgb(221, 229, 237,.5) ; 
+}
+.post button{
+  padding: 8px 20px;
+  color: #000440;
+  border-radius: 10px;
+transition: .4s;
+background-color: transparent;
+border: 3px solid  #000440 ;
+cursor: pointer;
+}
+.post button:hover{
+  color: white;
+  border: 3px solid  #000440 ;
+  background-color: #000440;
+  box-shadow: 1px 5px 8px -5px #000440;
+}
+#backGroundColor img{
+  width: 25%;
+  height: 250px;
+  border-radius: 5px;
+background-size: 100% 120%;
+align-self: flex-start;
+}
+
+
+
+.post h3{
+  padding: 0 5px;
+    margin: 0;
+    margin-bottom: 5px;
+    font-family: "Segoe UI",Arial,sans-serif;
+    font-weight: 600;
+    
+    font-style: italic;
+}
+
+.post h6{
+  background: -webkit-linear-gradient(#515151, #515151);
+  -webkit-background-clip: text;
+  margin-left: 5px;
+  -webkit-text-fill-color: transparent;  
+}
+#backGroundColor p{
+  align-self: flex-start;
+}
+
+.blog h2{
+  font-weight: bold;
+  height: 50px;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 28px;
+  height: max-content;
+  width: 560px;
+  white-space: normal;
+  
+  }
+  .blog h4{
+  color: #8c8c8c;
+  margin: 0;
+  font-size: 18px;
+  background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+  }
+  .blog_contant{
+      display: flex;
+      flex-direction: row;
+      max-width: 100%;
+      gap:20px;
+  }
+  #blogs{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+
+     margin-top: 30px;
+      height: max-content;
+      width: 100%;
+      gap:30px
+  }
+  
+  #leftblog_contant{
+    width: 50%;
+  }
+
+  .blog img{
+    width: 160px;
+    height: 240px;
+      max-width: 300px;
+      margin-bottom: 10px;
+      cursor: pointer;
+  }
+  
+  .blog p{
+      color: #6b6b6b;
+      max-height: 400px;
+      overflow: hidden;
+      font-size: 18px;
+  
+  }
+  .blog a{
+  text-decoration: none;    border: none;
+  background: -webkit-linear-gradient(#0918ec, rgb(0, 0, 0));
+  font-size: 16px;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  
+  }
+  .line{
+      width: 100px;
+      height: 3px;
+      background-color:  rgb(193, 193, 193);
+      border-radius: 10px;
+      margin-bottom: 20px;
+  }
+  
+  .bruh{
+      display: flex;
+      flex-direction: column;
+      gap:20px
+  }
+  .blog{
+    padding: 5px 30px;
+    
+  }
+  .rating img:hover {
+    box-shadow: none;
+    cursor: default;
+  }
+  .rating img {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 10px;
+  }
+  .down{
+    display: flex;
+    justify-content: end;
+    width: 100%;
+  }
+ 
+  #title {
+    text-align: center;
+    padding-bottom: 5px;
+    border-bottom: #000440 solid 1px;
+}
+
+#CreatPost h2{
+    background: -webkit-linear-gradient(#0918ec, rgb(0, 0, 0));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+
+}
+#postdes {
+   display: block; 
+  width: 96%;
+  margin: 10px 0;
+  margin-left: 2%;
+  color: #01086a;
+font-size: 18px;
+  resize: none;
+  overflow: auto;
+  background-color: #fafafad1;
+  border-radius: 20px;
+  outline: none;
+  padding: 20px;
+  border: #010763 solid 2px;
+  height:240px;
+}
+input{
+  color: #01086a;
+}
+.bot button{
+ 
+    padding: 6px 20px;
+    color: #000440;
+    border-radius: 10px;
+    transition: .4s;
+    letter-spacing: 2px;
+    font-size: 18px;
+    font-weight: 500;
+    background-color: transparent;
+    border: 3px solid #010763;
+    cursor: pointer;
+    z-index: 1;
+}
+.titlein{
+  width: 43%;
+  margin-right: 15%;
+
+}
+.bot{
+  padding: 0px 20px;
+}
+
+button:disabled,
+button[disabled]{
+  color: #00044099;
+  border: 3px solid #0004409d;
+  cursor: not-allowed;
+}
+
+datalist {
+  position: absolute;
+  max-height: 20em;
+  border: 0 none;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+datalist option {
+  font-size: 0.8em;
+  padding: 0.3em 1em;
+  background-color: #000440;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+#topwithHeader
+{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#topwithHeader h4{
+  opacity: .6;
+}
+
+/* option active styles */
+#states option:hover,
+#states option:focus {
+  color: #fff;
+  background-color: rgb(1, 99, 198);
+  outline: 0 none;
+}
+
+#states option {
+  font-size: 1em;
+  padding: 0.3em 1em;
+  background-color: #000440;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+  width: 300px;
+}
+
+
+.link {
+  color: white;
+  text-decoration:none;
+  white-space: nowrap;
+  display: inline-flex;
+  line-height: 2;
+}
+#states option:hover {
+  animation: backAndForth 3s linear infinite;
+}
+@keyframes backAndForth {
+  0% { transform: translateX(0); }
+  10% { transform: translateX(0); }
+  45% { transform: translateX(calc(-100% + 210px)); }
+  55% { transform: translateX(calc(-100% + 210px)); }
+  90% { transform: translateX(0); }
+  100% { transform: translateX(0); }
+}

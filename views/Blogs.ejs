@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <link rel="icon" type="image/x-icon" href="LOGO.png">
+
+    <link rel="stylesheet" href="footer.css">
+    <link rel="stylesheet" href="Blogs_Style.css">
+    <title>Blogs</title>
+</head>
+
+<body>
+    <%- include('partials/navbar', {q: "" , active: "Blogs" , userIn}) %>
+        <div id="all"></div>
+
+        <div id="blogs">
+            <% if (userIn!=null) { %>
+            <section>
+                 
+          
+                <div id="CreatPost">
+                    <h2 id="title">Creat a new Blog</h2>
+                    <form method="POST" action="/blogs">
+                        <textarea name="description" id="postdes" cols="25" rows="8"
+                            placeholder=" Blog content ..."></textarea>
+                        <div class="bot up">
+
+                            <input type="text" name="blog_title" id="Postusername" class="titlein" placeholder="Title....">
+                            <input list="states" name="title" id="Postusername" value="<%= books[0].title %>"
+                                placeholder="Book Name....">
+                            <datalist id="states">
+                                <% books.forEach(b=> { %>
+                                    
+                                    <option value="<%= b.title %>" class="link link_animated">
+                                        <%=b.title%>
+                                    </option>
+                                    <% }) %>
+
+                            </datalist>
+                            <button type="submit" style="margin: 5px;" id="Submitpost">Post</button>
+                        </div>
+                    </form>
+
+                </div>
+            </section>
+            <% } %>
+            <% blgs.forEach(blg=> { %>
+                <div class="post <%= blg.blog_id %>">
+                    <div class="blog " id="<%= blg.blog_id %>2">
+                        <div id="topwithHeader">
+                            <h2 id="<%=blg.user_id%>">
+                                <%= blg.blog_title %>
+                            </h2>
+                            <div id="blogRight">
+                                <h4>
+                                    <%= blg.date_posted %>
+                                </h4>
+                                <div class="dropmenu <%= blg.id %>">
+                                    <button onclick="editBlog('<%=blg.blog_id%>','<%=blg.title%>')">Edit</button>
+                                    <button onclick="deleteBlog('<%= blg.blog_id %>')">Delete</button>
+                                </div>
+                                <button class="edit_delete" id="<%= blg.blog_id %>"  onclick="edit_delete(this.id,'<%=((userIn!=null)&&(blg.user_id==userIn.user_id))?1:0%>')"></button>
+                            </div>
+                        </div>
+                        <div class="blog_contant">
+                            <div class="leftblog_contant">
+                                <img src="<%= blg.photo%>" alt="<%= blg.title%>"
+                                    onclick="location.href='/book/<%=blg.book_id%>'">
+                                <div class="rating">
+                                    <% for( let i=0; i < blg.rating; i++ ) { %>
+                                        <img src="./imgs/star.png" alt="" />
+                                        <% } %>
+                                            <% for( let i=0; i < 5 - blg.rating; i++ ) { %>
+                                                <img src="./imgs/star (1).png" alt="" />
+                                                <% } %>
+                                </div>
+                            </div>
+                            <div class="bruh">
+                                <p>
+                                    <%= blg.description %>
+                                </p>
+                                <a href="/book/<%= blg.book_id %>">View book details ...</a>
+                            </div>
+                        </div>
+                        <div class="down">
+                         <h4>   <a href="/profile/<%=blg.username%>"> by <%= blg.username %></a>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <% }) %>
+                    <section>
+                        <form method="post" action="/editblog">
+                            <div id="EditPost">
+                                <h2 id="title">Edit Blog</h2>
+                                <textarea name="description" id="postdes" cols="25" rows="8"
+                                    placeholder=" Blog content ..."></textarea>
+                                <div class="bot">
+                                    <input type="text" name="title" id="Postusername" class="titlein"
+                                        placeholder="Title....">
+                                    <input  name="name" id="Postusername" value="<%= books[0].name %>"
+                                        placeholder="Book Name....">
+                                    <input type="text" name="id" style="display: none;">
+                                    <button type="submit" style="margin: 5px;" id="Submitpost">Post</button>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+        </div>
+
+        </div>
+        <%- include ('partials/footer') %>
+
+            <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+            <script>
+                var box = document.getElementsByClassName("file-image")[0];
+                var fileInp = document.getElementById("inputPostimg");
+                let button = document.getElementById('Submitpost')
+                let textarea = document.getElementById('postdes');
+                let textinput = Array.from(document.querySelectorAll('#Postusername'));
+                let all = document.getElementById('all')
+                textinput.push(textarea);
+                button.disabled = true;
+                textinput.forEach((e) => {
+                    e.addEventListener('input', () => {
+
+                        if (textarea.value != '' && textinput[0].value.length != 0) {
+                            button.disabled = false;
+                        }
+                        else {
+                            button.disabled = true;
+                        }
+                    })
+                })
+                function edit_delete(id,x) {
+                    if(x==1){
+                    let dot = document.getElementById(id).parentElement.childNodes[3];
+                    dot.style.display = 'block'
+                    all.style.display = 'block'
+                    all.style.opacity = 0.01
+
+                    dot.style.zIndex = 50
+                    all.addEventListener("click", () => {
+                        dot.style.display = "none";
+                        all.style.display = "none";
+                        dot.style.zIndex = 5
+                    });
+                }
+
+                }
+                function deleteBlog(idd) {
+                    fetch('/deleteBlog', {
+                        method: 'DELETE',
+                        headers: {
+                            'Accept': 'application/json',
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id: idd })
+                    }).then(() => {
+
+
+                         location.reload();
+                    }).catch(()=>{
+                        console.log("not working")
+                    });
+                }
+                function editBlog(blg,name) {
+                    all.style.display = 'block'
+
+                    all.style.opacity = 1
+                    console.log(blg)
+                
+                    let dot = document.getElementById(blg).parentElement.childNodes[3];
+                    dot.style.display = 'none'
+                    let editform = document.getElementById("EditPost")
+                    editform.style.display = 'table'
+
+                    let editingblog = document.getElementsByClassName(`${blg}`)[0];
+                    editingblog.scrollIntoView()
+
+                    editform.querySelector('#postdes').value = editingblog.getElementsByClassName('bruh')[0].getElementsByTagName('p')[0].innerText
+                    editform.querySelector('.bot').getElementsByTagName('input')[0].value = editingblog.querySelector('#topwithHeader').getElementsByTagName('h2')[0].innerText
+                    editform.querySelector('.bot').getElementsByTagName('input')[1].value = editingblog.querySelector('.blog_contant').getElementsByTagName('img')[0].alt
+                    editform.querySelector('.bot').getElementsByTagName('input')[2].value = blg
+                    all.addEventListener("click", () => {
+                        editform.style.display = "none";
+                        all.style.display = "none";
+                        dot.style.zIndex = 5
+                    });
+
+
+
+                }
+
+            </script>
+
+            <script src="https://cdn.jsdelivr.net/npm/datalist-css/dist/datalist-css.min.js"></script>
+
+</body>
+
+</html>

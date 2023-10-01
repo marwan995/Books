@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/x-icon" href="../LOGO.png">
+
+  <link rel="stylesheet" href="../../style_navbar.css" />
+</head>
+
+<div class="navbar">
+  <div class="upper">
+    <a href="/" class="logo">
+      <img src="https://i.ibb.co/5nRj5M6/Logo1.png" alt="" />
+      <h2>BOOKSHOP</h2>
+    </a>
+    <form action="/search" class="search_box">
+      <input type="text" name="q" placeholder="Search Over 30 million book titles" value="<%= q %>"/>
+    </form>
+    <div class="icons">
+      <div class="drop-down">
+        <a href="/cart">
+          <img src="../../imgs/shopping-cart.png" alt="shopping cart" />
+        </a>
+        <form class="menu" method="get" action="/cart">
+          <h3>You have <%= cart.length %>  Items In your cart</h3>
+          <div class="book-list" style="">
+            <% cart.forEach(book => { %>
+              <div class="book">
+                <img src="<%= book.photo %>" alt="">
+                <div class="book-content">
+                  <a href="/book/<%= book.book_id %>">
+                    <h2><%= book.title %></h2>
+                  </a>
+                  <h3><%= book.author %></h3>
+                  <div class="navbar-price">
+                    <h3>Qty: <%= book.qty %></h3>
+                    <h3>Price: (<%= book.qty %>x) $<%= book.price %></h3>
+                    <h3>Total: $<%= book.qty * book.price %></h3>
+                  </div>
+                </div>
+              </div>
+              <hr>
+            <% }) %>
+            <% if(userIn!=null){%>
+            <input type="submit" value="PROCESS CHECKOUT">
+            <%}%>
+          </div>
+        </form>
+      </div>
+      <div class="drop-down">
+       
+          <% if (userIn==null) { %>
+            <a href="/signin">
+            <img src="../../imgs/user.png" alt="User" />
+          <% }else{ %>
+            <a href="/profile/<%=userIn.username  %>">
+            <img src="<%= userIn.profile_pic%>" alt="User" id="pfpimg" />
+
+            <% } %>  
+        </a>
+        <!-- <div class="menu">
+
+        </div> -->
+      </div>
+    </div>
+  </div>
+  <div class="links">
+    <ul class="container">
+      <% if (active == "Home") { %>
+        <li class="active"><a href="/">Home</a></li>  
+      <% } else { %>
+        <li><a href="/">Home</a></li>
+      <% } %>
+
+      <% if (active == "Books") { %>
+        <li class="active"><a href="/search">Books</a></li>  
+      <% } else { %>
+        <li><a href='/search'>Books</a></li>
+      <% } %>
+      <% if (active == "Blogs") { %>
+        <li class="active"><a href="/Blogs">Blogs</a></li>  
+      <% } else { %>
+        <li><a href="/Blogs">Blogs</a></li>
+      <% } %>
+      <li><a href="/BorrowBooks">Borrow Books</a></li>
+      <% if (active == "Events") { %>
+        <li class="active"><a href="/events">Events</a></li>  
+      <% } else { %>
+        <li><a href="/events">Events</a></li>
+      <% } %>
+    </ul>
+  </div>
+</div>

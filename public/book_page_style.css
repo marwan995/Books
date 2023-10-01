@@ -1,0 +1,418 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+a{
+  text-decoration: none;
+}
+
+h2 {
+  margin-bottom: 15px;
+}
+
+.content-marg {
+  margin-bottom: 8px;
+}
+
+.top-book-author,
+.book-author {
+  color: rgba(0, 0, 0, 0.73);
+}
+
+.top {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 60px;
+}
+#addComment{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 700px;
+}
+#commentPost {
+  border: 2px solid #010763;
+  padding: 5px  20px;
+background-color: #010763;
+border-radius: 5px;
+font-size: 24px;
+color: white;
+cursor: pointer;
+
+}
+#postdes {
+  
+ width: 600px;
+ color: #01086a;
+font-size: 16px;
+ resize: none;
+ background-color: #fafafad1;
+ border-radius: 20px;
+ outline: none;
+ padding:8px 8px 8px 10px;
+ padding-top: 12px;
+ border: #010763 solid 2px;
+ min-height:55px;
+ height: max-content;
+ -ms-overflow-style: none;  /* IE and Edge */
+ scrollbar-width: none; 
+}
+#rati h2{
+  background: -webkit-linear-gradient(#121cb3, rgb(0, 0, 0));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+#rati{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap:20px
+}
+#postdes::-webkit-scrollbar {
+  display: none;
+}
+.to-sections {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-right: 12px;
+}
+.content {
+  max-width: 520px;
+}
+.desc {
+  display: flex;
+  gap: 30px;
+  flex-basis: 50%;
+  margin: 0 0 50px 0;
+}
+
+.mainBook {
+  width: 180px;
+  height: 290px;
+  box-shadow: 3px 0px 23px #aaaaaa;
+}
+
+.rate {
+  display: flex;
+  gap: 15px;
+}
+.fa-star {
+  color: gold;
+}
+.price {
+  width: 80px;
+  font-size: 20px;
+  border: 2.5px solid #151a27;
+  border-radius: 4px;
+  text-align: center;
+  color: #151a27;
+}
+
+.btns {
+  margin: 40px 0 0 0;
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  align-items: center;
+}
+
+.circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  text-align: center;
+  cursor: pointer;
+  background-color: #151a27;
+  color: #fff;
+  border: 0;
+}
+
+.circle:hover{
+  background-color: #2475d0;
+  box-shadow: 0px 1px 6px #151a27;
+}
+
+input[type="number"] {
+  cursor: text;
+  border: 2px solid #000;
+  background: transparent;
+  color: #000;
+}
+
+input[type="number"]:hover{
+  box-shadow: none;
+  background: transparent;
+}
+
+.space{
+  margin: 0 5px;
+}
+
+.line{
+  background: rgb(122, 120, 120);
+  opacity: 0.3;
+  width: 1px;
+  height: 40px !important;
+  margin: 0 0 2px 0;
+}
+
+.btn{
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  color: white;
+  background-color: #151a27;
+  border: none;
+  box-shadow: 0px 1px 2px #2475d0;
+  margin: 0 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover{
+  background-color: #2475d0;
+  box-shadow: 0px 1px 6px #151a27;
+}
+
+.side-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  max-width: 250px;
+  width: 100%;
+}
+
+.side-books {
+  display: flex;
+  gap: 10px;
+  margin: 0 0 40px 0;
+  max-width: 200px;
+  width: 100%;
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+.side-books img{
+  border-radius: 10px 0 0 10px;
+}
+
+.side-books:hover {
+  box-shadow: 0px 1px 6px #151a27;
+}
+
+.side-books-images {
+  max-width: 100px;
+  width: 100%;
+}
+
+.side-price {
+  color: #151a27;
+  margin-top: 4px;
+  font-size: 15px;
+}
+.book-name {
+  font-size: 16px;
+  font-weight: 540;
+  color: rgba(0, 0, 0, 0.838);
+}
+.book-author {
+  font-size: 14px;
+}
+
+.btn-add,
+.btn-borrow {
+  padding: 20px 40px;
+  color: white;
+  background-color: #151a27;
+  border: none;
+  box-shadow: 0px 1px 6px #2475d0;
+}
+
+.btn-add:hover,
+.btn-borrow:hover {
+  background-color: #2475d0;
+  box-shadow: 0px 1px 6px #151a27;
+}
+
+.table-desc,
+td {
+  border: 0.5px solid rgb(60, 60, 60);
+  width: 100%;
+  border-collapse: collapse;
+  height: 8vh;
+  padding: 15px;
+  font-size: 14px;
+}
+.first-col {
+  width: 20%;
+  font-weight: bold;
+  background-color: rgb(246, 244, 244);
+  color: rgb(67, 67, 67);
+}
+.second-col {
+  color: rgba(0, 0, 0, 0.708);
+}
+.com-reviews {
+  font-weight: bold;
+}
+
+.reviews-heading{
+  margin: 30px 0 0 0;
+}
+.comments {
+  display: flex;
+  flex-direction: column;
+  margin: 10px 0 40px 0;
+  gap: 40px;
+}
+.img-comm {
+  width: 80px;
+  height: 80px;
+  border-radius: 100px;
+}
+.review {
+  display: flex;
+  gap: 30px;
+}
+.comment-area {
+  display: flex;
+  flex-direction: column;
+}
+.name-with-rate {
+  display: flex;
+  gap: 10px;
+}
+.reviewer-name {
+  font-weight: bold;
+  color: rgb(67, 67, 67);
+}
+.rated-it {
+  font-size: small;
+  margin-top: 2px;
+}
+.comment-date {
+  font-size: small;
+  margin-top: 0px;
+  color: #bbb;
+}
+.comment-text {
+  margin-top: 5px;
+  max-width: 520px;
+  margin-bottom: 10px;
+}
+.hr {
+  width: 100%;
+  border-bottom: 1px solid;
+}
+
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.header h2{
+margin: 0;
+}
+
+@media (max-width: 960px) {
+  .top {
+    display: flex;
+    flex-direction: column;
+    margin: 4px 7px;
+  }
+  .side-bar {
+    border-top: 1px solid;
+  }
+  .side-books {
+    margin: 0 10px 7px 0;
+  }
+  .side-books-parent {
+    margin-bottom: 5px;
+    display: flex;
+    flex-direction: row;
+    max-width: 600px;
+    flex-wrap: wrap;
+  }
+  .edit-main-btns {
+    flex-direction: column;
+  }
+  .btn-borrow {
+    position: relative;
+    left: 150px;
+  }
+}
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color:    #01086321;
+  ;
+}
+
+.rating label:last-child .icon {
+  color: #000;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #ffd700;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  border:solid 2px  #010763;
+
+  text-shadow: 0 0 5px #ffd700;
+}
+.subnitform{
+  display: flex;
+  flex-direction: column;
+}
