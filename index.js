@@ -15,7 +15,8 @@ const sessionPool = require("pg").Pool;
 
 const { Pool } = require("pg");
 
-const connectionString ="postgresql://postgres:root@localhost:5432/BooksShop";
+const connectionString ="postgresql://postgres:root@localhost:5432/BookShop";
+// const connectionString ="postgres://vasceujh:kgoMtpiQKZ2gDHqwGsSuaFTWFc85ilak@hansken.db.elephantsql.com/vasceujh";
 const pool = new Pool({ connectionString });
 const sessionDBaccess = new sessionPool({ connectionString });
 

@@ -14,7 +14,7 @@ function toSigninTab() {
         signinTab.classList.toggle("activeTab");
         loginHeader.classList.toggle("hiddenH2");
         signinHeader.classList.toggle("hiddenH2");
-        frame.style.height = "80%";
+        frame.style.height = "100%";
         subButton.textContent = "Create account";
         setTimeout(() => {
             signinDiv.style.display = "block";
